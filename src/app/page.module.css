@@ -1,0 +1,60 @@
+.container {
+    padding: 20px;
+}
+
+.navButtons {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.switchLabel {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 16px;
+}
+
+.switch {
+    margin: 0 10px;
+}
+
+.activeLabel {
+    color: #0070f3;
+    font-weight: bold;
+}
+
+.pageContent {
+    position: relative;
+    overflow: hidden;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+}
+
+.slide-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.slide-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 500ms, transform 500ms;
+}
+
+.slide-exit {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.slide-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: opacity 500ms, transform 500ms;
+}

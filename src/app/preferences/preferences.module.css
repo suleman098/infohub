@@ -1,0 +1,121 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+    background-color: white;
+}
+
+.categoriesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.categoryButton {
+    padding: 10px 20px;
+    border: 1px solid #0070f3;
+    background-color: white;
+    color: #0070f3;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.categoryButton:hover {
+    background-color: #0070f3;
+    color: white;
+}
+
+.categoryButton.selected {
+    background-color: #0070f3;
+    color: white;
+}
+
+.saveButton {
+    padding: 10px 20px;
+    border: none;
+    background-color: #0070f3;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.message {
+    color: green;
+    margin-top: 20px;
+}
+
+.section {
+    margin-top: 40px;
+    text-align: left;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    position: relative;
+}
+
+.section h2 {
+    margin-bottom: 20px;
+}
+
+.scrollContainer {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+.article {
+    background-color: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 350px;
+    max-width: 350px;
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+}
+
+.article:hover {
+    background-color: #f0f0f0;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.article h3 {
+    margin: 10px 0;
+    padding: 0 10px;
+    color: black;
+}
+
+.article p {
+    padding: 0 10px;
+    color: black;
+    flex-grow: 1;
+}
+
+.viewMore {
+    color: #0070f3;
+    text-decoration: none;
+    margin-top: auto;
+    padding: 8px;
+    background-color: #e6f2ff;
+    border-radius: 4px;
+    width: 100%;
+    text-align: center;
+}
+
