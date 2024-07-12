@@ -2,7 +2,12 @@
 
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    sendEmailVerification,
+    signOut
+} from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { motion } from 'framer-motion';
 import { db } from '../firebase';
@@ -15,6 +20,7 @@ const RegisterPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
+    const [message, setMessage] = useState<string | null>(null);
     const router = useRouter();
 
     const handleRegister = async (e: React.FormEvent) => {
@@ -24,16 +30,25 @@ const RegisterPage: React.FC = () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const user = userCredential.user;
 
-            // Update profile
-            await updateProfile(user, { displayName: `${firstName} ${lastName}` });
+            // Send email verification
+            await sendEmailVerification(user);
+
+            // Store user details in Firestore with verification status
             await setDoc(doc(db, 'users', user.uid), {
                 firstName,
                 lastName,
                 email,
+                verified: false, // Set verified to false initially
             });
 
-            // Redirect to main page
-            router.push('/');
+            // Sign out the user immediately
+            await signOut(auth);
+
+            // Show a message to inform the user to check their email
+            setMessage('A verification email has been sent to your email address. Please verify your email before logging in.');
+
+            // Redirect to confirmation page
+            router.push('/signupconfirmationpage');
         } catch (err) {
             setError('Failed to create an account. Please check your details and try again.');
         }
@@ -82,6 +97,7 @@ const RegisterPage: React.FC = () => {
                     <button type="submit" className={styles.button}>Sign Up</button>
                 </form>
                 {error && <p className={styles.error}>{error}</p>}
+                {message && <p className={styles.message}>{message}</p>}
                 <div className={styles.footer}>
                     <p>Already have an account? <Link href="/login" className={styles.link}>Sign In</Link></p>
                 </div>

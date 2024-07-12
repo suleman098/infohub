@@ -20,6 +20,7 @@
     "react-dom": "^18",
     "react-firebase-hooks": "^5.1.1",
     "react-modal": "^3.16.1",
+    "react-phone-input-2": "^2.15.1",
     "react-select": "^5.8.0",
     "react-spinners": "^0.14.1",
     "react-switch": "^7.0.0",

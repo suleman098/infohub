@@ -11,6 +11,7 @@ const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
+    const [loading, setLoading] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [resetEmail, setResetEmail] = useState('');
     const [resetMessage, setResetMessage] = useState<string | null>(null);
@@ -28,22 +29,28 @@ const LoginPage: React.FC = () => {
 
     const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         try {
             await signInWithEmailAndPassword(auth, email, password);
             router.push('/'); // Redirect to home page after successful login
         } catch (err) {
             setError('Failed to sign in. Please check your credentials.');
+        } finally {
+            setLoading(false);
         }
     };
 
     const handleForgotPassword = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         try {
             await sendPasswordResetEmail(auth, resetEmail);
             setResetMessage('Password reset email sent. Check your inbox.');
             setResetEmail('');
         } catch (err) {
             setResetMessage('Failed to send password reset email. Please try again.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,6 +72,7 @@ const LoginPage: React.FC = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder="Email"
                         className={styles.input}
+                        required
                     />
                     <input
                         type="password"
@@ -72,18 +80,25 @@ const LoginPage: React.FC = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
                         className={styles.input}
+                        required
                     />
-                    <button type="submit" className={styles.button}>Sign In</button>
+                    <button type="submit" className={styles.button} disabled={loading}>
+                        {loading ? 'Signing In...' : 'Sign In'}
+                    </button>
                 </form>
                 {error && <p className={styles.error}>{error}</p>}
                 <div className={styles.footer}>
-                    <button onClick={() => setModalOpen(true)} className={styles.linkButton}>Forgot Password?</button>
+                    <button onClick={() => setModalOpen(true)} className={styles.linkButton}>
+                        Forgot Password?
+                    </button>
                     <div className={styles.divider}></div>
-                    <Link href="/register" className={styles.buttonSecondary}>Sign Up</Link>
+                    <Link href="/register" className={styles.buttonSecondary}>
+                        Sign Up
+                    </Link>
                 </div>
             </div>
             {modalOpen && (
-                <div className={styles.modal}>
+                <div className={styles.modal} role="dialog" aria-modal="true">
                     <div className={styles.modalContent}>
                         <h2 className={styles.modalTitle}>Reset Password</h2>
                         <form onSubmit={handleForgotPassword} className={styles.form}>
@@ -93,11 +108,16 @@ const LoginPage: React.FC = () => {
                                 onChange={(e) => setResetEmail(e.target.value)}
                                 placeholder="Enter your email"
                                 className={styles.input}
+                                required
                             />
-                            <button type="submit" className={styles.button}>Send Reset Email</button>
+                            <button type="submit" className={styles.button} disabled={loading}>
+                                {loading ? 'Sending...' : 'Send Reset Email'}
+                            </button>
                         </form>
                         {resetMessage && <p className={styles.message}>{resetMessage}</p>}
-                        <button onClick={() => setModalOpen(false)} className={styles.buttonSecondary}>Close</button>
+                        <button onClick={() => setModalOpen(false)} className={styles.buttonSecondary}>
+                            Close
+                        </button>
                     </div>
                 </div>
             )}
