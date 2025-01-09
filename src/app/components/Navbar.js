@@ -25,7 +25,7 @@ function Navbar() {
   }
 
   const handleLoginClick = () => {
-    router.push("/pages/login");
+    router.push("/login");
   };
 
   const handleLogoutClick = () => {
@@ -35,15 +35,15 @@ function Navbar() {
   };
 
   const handleSearchClick = () => {
-    router.push("/pages/search");
+    router.push("/search");
   };
 
   const handleForyouPageClick = () => {
-    router.push("/pages/foryou");
+    router.push("/foryou");
   };
 
   const handleUserDetailsClick = () => {
-    router.push("/pages/userdetails");
+    router.push("/userdetails");
   };
 
   return (
