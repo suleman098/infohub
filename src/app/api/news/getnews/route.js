@@ -1,6 +1,7 @@
 export async function GET(request) {
   const url = "https://newsapi.org/v2/top-headlines";
-  const apiKey = "ef4c3a54f35c40998220ab80b52c1efe";
+  const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+
 
   const { searchParams } = new URL(request.url);
   searchParams.append("apiKey", apiKey);
