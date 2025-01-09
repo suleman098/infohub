@@ -1,5 +1,6 @@
 export async function GET(request) {
-  const apiKey = "ef4c3a54f35c40998220ab80b52c1efe";
+const apiKey = process.env.NEXT_PUBLIC_API_KEY;
+
 
   // Extract the sources parameter from the query
   const url = new URL(request.url);
