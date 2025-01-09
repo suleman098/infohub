@@ -6,12 +6,15 @@ import { auth } from "../firebase/firebaseConfig"; // Firebase config
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/firebaseConfig"; // Assuming Firestore is initialized
 
-const AppContext = createContext();
 
+const AppContext = createContext();
+8
 export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [selectedPreferences, setSelectedPreferences] = useState([]);
   const [showModal, setShowModal] = useState(false);
+
+
 
   const openModal = () => setShowModal(true);
   const closeModal = () => setShowModal(false);

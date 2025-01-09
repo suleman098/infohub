@@ -8,12 +8,12 @@ const ProtectedRoute = ({ children }) => {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push("/pages/login");
+      router.push("/");
     }
   }, [user, loading, router]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="text black">Loading...</div>;
   }
 
   if (!user) {

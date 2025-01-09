@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useSearch } from "@/app/hooks/useSearch";
 import SearchBar from "@/app/components/SearchBar";
 import SearchResultCard from "@/app/components/SearchResultCard";
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 
 function Search() {
   const [query, setQuery] = useState("");
@@ -14,6 +15,8 @@ function Search() {
   };
 
   return (
+    <ProtectedRoute>
+
     <div className="search-container mt-8">
       <SearchBar onSearch={handleSearch} />
 
@@ -24,11 +27,11 @@ function Search() {
         {data && data.articles && data.articles.length > 0 ? (
           data.articles.map((article, index) => (
             <SearchResultCard
-              key={index}
-              title={article.title}
-              description={article.description}
-              url={article.url}
-              imageUrl={article.urlToImage || "https://via.placeholder.com/150"}
+            key={index}
+            title={article.title}
+            description={article.description}
+            url={article.url}
+            imageUrl={article.urlToImage || "https://via.placeholder.com/150"}
             />
           ))
         ) : (
@@ -36,6 +39,7 @@ function Search() {
         )}
       </div>
     </div>
+        </ProtectedRoute>
   );
 }
 

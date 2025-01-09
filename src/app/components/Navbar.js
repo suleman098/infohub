@@ -7,15 +7,22 @@ import {
   FaUser,
   FaHome,
 } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { auth } from "../firebase/firebaseConfig";
 import { signOut } from "firebase/auth";
 import { useAppContext } from "../context/AppContext";
 import Navbutton from "./Navbutton";
+import RouteGuard from "./RouteGuard";
 
 function Navbar() {
   const { user } = useAppContext();
   const router = useRouter();
+  const pathname = usePathname();
+
+  // Guard clause to hide Navbar on specific routes
+  if (pathname === "/notfound") {
+    return null;
+  }
 
   const handleLoginClick = () => {
     router.push("/pages/login");
@@ -40,6 +47,8 @@ function Navbar() {
   };
 
   return (
+    <RouteGuard>
+
     <div className="navbar bg-white border-2 border-gray-300 rounded-xl shadow-md w-full px-4">
       <div className="navbar-center flex justify-between w-full">
         <a className="btn btn-ghost text-black text-xl">Info Hub</a>
@@ -67,6 +76,7 @@ function Navbar() {
         </div>
       </div>
     </div>
+   </RouteGuard>
   );
 }
 

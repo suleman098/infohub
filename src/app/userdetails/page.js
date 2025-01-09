@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import React, { useState } from "react";
 import { useAppContext } from "@/app/context/AppContext";
 import { updateUserDetailsInFirestore } from "@/app/firebase/ auth";
+import ProtectedRoute from "@/app/components/ProtectedRoute";
 function UserDetails() {
   const { user, updateUserDetails } = useAppContext();
   const [firstName, setFirstName] = useState(user?.firstName || "");
@@ -33,6 +34,8 @@ function UserDetails() {
   };
 
   return (
+    <ProtectedRoute>
+
     <div className="flex justify-center items-center h-screen">
       <div className="card bg-white border-2 border-gray-300 shadow-xl w-96 p-6">
         <form onSubmit={handleSubmit} className="text-center">
@@ -47,7 +50,7 @@ function UserDetails() {
               className="input input-bordered input-success w-full bg-white text-black"
               placeholder="Enter your first name"
               required
-            />
+              />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Last Name</label>
@@ -58,7 +61,7 @@ function UserDetails() {
               className="input input-bordered input-success w-full bg-white text-black"
               placeholder="Enter your last name"
               required
-            />
+              />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
@@ -68,13 +71,13 @@ function UserDetails() {
               disabled
               className="input input-bordered input-success w-full bg-gray-200 text-gray-500 cursor-not-allowed"
               placeholder="Email is not editable"
-            />
+              />
           </div>
           <button
             type="submit"
             className="flex items-center justify-center space-x-2 text-black btn btn-outline w-full mb-4"
             disabled={loading}
-          >
+            >
             {loading ? "Updating..." : "Update Details"}
           </button>
           {success && (
@@ -83,6 +86,7 @@ function UserDetails() {
         </form>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 

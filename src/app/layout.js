@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Navbar from "./components/Navbar";
 import Head from "next/head";
 
+
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
   variable: "--font-geist-sans",
@@ -22,6 +23,8 @@ export const metadata = {
   description: "You Personal New Scrapper",
 };
 
+
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -38,7 +41,7 @@ export default function RootLayout({ children }) {
         <AppProvider>
           <div className="flex flex-col items-center min-h-screen">
             <div className="w-1/2 mx-auto flex justify-center items-center">
-              <Navbar />
+            <Navbar/>
             </div>
             {children}
           </div>
