@@ -28,7 +28,7 @@ function Login() {
       toast.success("Logged in successfully!");
 
       // Navigate to the desired page
-      router.push("/pages/foryou");
+      router.push("/foryou");
     } catch (err) {
       // Log the actual error to the console for debugging
       console.error("Login error:", err);
@@ -42,7 +42,7 @@ function Login() {
   };
 
   const handleSignupClick = () => {
-    router.push("/pages/signup");
+    router.push("/signup");
   };
 
   return (
