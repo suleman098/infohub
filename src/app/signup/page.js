@@ -20,7 +20,7 @@ function Signup() {
   };
 
   const handleLoginClick = () => {
-    router.push("/pages/login"); // Redirect to login page
+    router.push("/login"); // Redirect to login page
   };
 
   return (
